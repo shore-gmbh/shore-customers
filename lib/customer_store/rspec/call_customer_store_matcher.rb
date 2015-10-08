@@ -27,6 +27,7 @@ module CustomerStore
       # was called.
       # @see ServiceMock
       # @see #matches?
+      # @see #respond_to?
       def method_missing(method_sym, *args, &block)
         stub_method = "stub_#{method_sym}".to_sym
         if customer_store.respond_to?(stub_method)
@@ -36,6 +37,11 @@ module CustomerStore
         else
           super
         end
+      end
+
+      # @see #method_missing
+      def respond_to?(method_sym)
+        super || customer_store.respond_to?(method_sym)
       end
 
       def matches?(actual)
