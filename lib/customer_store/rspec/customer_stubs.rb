@@ -30,7 +30,7 @@ module CustomerStore
           .to_return(
             status: customer_status(resp),
             body: resp['body_json'] ||
-              customer_resp_body(customer_id, {}, resp).to_json,
+              customer_resp_body({ 'id' => customer_id }, resp).to_json,
             headers: customer_headers)
       end
 
@@ -55,8 +55,8 @@ module CustomerStore
             body: customer_update_body(attributes))
           .to_return(
             status: customer_status(resp),
-            body: resp['body_json'] ||
-              customer_resp_body(customer_id, attributes, resp).to_json,
+            body: resp['body_json'] || customer_resp_body(
+              attributes.merge('id' => customer_id), resp).to_json,
             headers: customer_headers)
       end
 

@@ -27,7 +27,7 @@ module CustomerStore
           .to_return(
             status: webhook_status(resp),
             body: resp['body_json'] ||
-              webhook_resp_body(webhook_id, {}, resp).to_json,
+              webhook_resp_body({ 'id' => webhook_id }, resp).to_json,
             headers: webhook_headers)
       end
 
@@ -40,8 +40,8 @@ module CustomerStore
             body: webhook_update_body(attributes))
           .to_return(
             status: webhook_status(resp),
-            body: resp['body_json'] ||
-              webhook_resp_body(webhook_id, attributes, resp).to_json,
+            body: resp['body_json'] || webhook_resp_body(
+              attributes.merge('id' => webhook_id), resp).to_json,
             headers: webhook_headers)
       end
 

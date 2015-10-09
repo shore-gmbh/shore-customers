@@ -26,9 +26,9 @@ module CustomerStore
         }
       end
 
-      def attribute_definition_resp_body(definition_id, attributes, resp)
-        attrs = (resp['body'].try(:[], 'attribute_definition') || attributes)
-                .merge('id' => definition_id)
+      def attribute_definition_resp_body(attributes, resp)
+        attrs = attributes.merge(
+          resp['body'].try(:[], 'attribute_definition') || {})
         {
           'attribute_definition' => attribute_definition(attrs),
           'event_id' => SecureRandom.uuid

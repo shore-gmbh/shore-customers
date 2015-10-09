@@ -28,7 +28,21 @@ module CustomerStore
           .to_return(
             status: attribute_definition_status(resp),
             body: resp['body_json'] ||
-              attribute_definition_resp_body(id, {}, resp).to_json,
+              attribute_definition_resp_body({ 'id' => id }, resp).to_json,
+            headers: attribute_definition_headers)
+      end
+
+      # @return WebMock::RequestStub
+      def stub_create_attribute_definition(oid, attrs = {}, resp = {})
+        url = "#{base_uri}/v1/#{oid}/attribute_definitions"
+        stub_request(:post, url)
+          .with(
+            query: hash_including({}),
+            body: attribute_definition_update_body(attrs))
+          .to_return(
+            status: attribute_definition_status(resp),
+            body: resp['body_json'] || attribute_definition_resp_body(
+              attrs, resp).to_json,
             headers: attribute_definition_headers)
       end
 
@@ -42,7 +56,7 @@ module CustomerStore
           .to_return(
             status: attribute_definition_status(resp),
             body: resp['body_json'] || attribute_definition_resp_body(
-              id, attrs, resp).to_json,
+              attrs.merge('id' => id), resp).to_json,
             headers: attribute_definition_headers)
       end
 

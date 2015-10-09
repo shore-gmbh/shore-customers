@@ -33,9 +33,8 @@ module CustomerStore
         }
       end
 
-      def customer_resp_body(customer_id, attributes, resp)
-        attrs = (resp['body'].try(:[], 'customer') || attributes)
-                .merge('id' => customer_id)
+      def customer_resp_body(attributes, resp)
+        attrs = attributes.merge(resp['body'].try(:[], 'customer') || {})
         {
           'customer' => customer(attrs),
           'event_id' => SecureRandom.uuid

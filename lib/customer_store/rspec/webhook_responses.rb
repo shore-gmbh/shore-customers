@@ -25,9 +25,8 @@ module CustomerStore
         }
       end
 
-      def webhook_resp_body(webhook_id, attributes, resp)
-        attrs = (resp['body'].try(:[], 'webhook') || attributes)
-                .merge('id' => webhook_id)
+      def webhook_resp_body(attributes, resp)
+        attrs = attributes.merge(resp['body'].try(:[], 'webhook') || {})
         {
           'webhook' => webhook(attrs),
           'event_id' => SecureRandom.uuid
