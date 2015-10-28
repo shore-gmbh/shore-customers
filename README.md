@@ -1,15 +1,13 @@
-# CustomerStore::Client
+# Shore::Customers::Client
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/customer_store/client`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+Client gem to communicate with the Customer Store Service (CSS).
 
 ## Installation
 
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'customer_store-client'
+gem 'shore-customers'
 ```
 
 And then execute:
@@ -18,7 +16,7 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install customer_store-client
+    $ gem install shore-customers
 
 ## Usage
 
@@ -32,5 +30,5 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/customer_store-client.
+TODO: Write contributing instructions here
 
