@@ -1,7 +1,7 @@
 require 'spec_helper'
 
-RSpec.describe CustomerStore::Client do
+RSpec.describe Shore::Customers::Client do
   it 'has a version number' do
-    expect(CustomerStore::Client::VERSION).not_to be nil
+    expect(Shore::Customers::VERSION).not_to be nil
   end
 end

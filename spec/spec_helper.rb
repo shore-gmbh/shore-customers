@@ -1,5 +1,5 @@
 $LOAD_PATH.unshift File.expand_path('../../lib', __FILE__)
-require 'customer_store/client'
+require 'shore/customers/client'
 
 # Load support files
 Dir[File.dirname(__FILE__) + '/support/**/*.rb'].each { |f| require f }

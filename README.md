@@ -1,4 +1,4 @@
-# CustomerStore::Client
+# Shore::Customers::Client
 
 Client gem to communicate with the Customer Store Service (CSS).
 
@@ -7,7 +7,7 @@ Client gem to communicate with the Customer Store Service (CSS).
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'customer_store-client'
+gem 'shore-customers'
 ```
 
 And then execute:
@@ -16,7 +16,7 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install customer_store-client
+    $ gem install shore-customers
 
 ## Usage
 

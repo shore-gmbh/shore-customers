@@ -1,13 +1,13 @@
 require 'spec_helper'
 
-RSpec.describe CustomerStore::AttributeDefinitionEndpoints do
-  describe CustomerStore::Client do
+RSpec.describe Shore::Customers::AttributeDefinitionEndpoints do
+  describe Shore::Customers::Client do
     before do
       expect(described_class.included_modules)
-        .to include(CustomerStore::AttributeDefinitionEndpoints)
+        .to include(Shore::Customers::AttributeDefinitionEndpoints)
     end
 
-    let(:client) { CustomerStore::Client.new }
+    let(:client) { Shore::Customers::Client.new }
 
     describe '#attribute_definitions_url' do
       it 'should return the attribute_definitions url for the given oid' do

@@ -1,13 +1,13 @@
 require 'spec_helper'
 
-RSpec.describe CustomerStore::CustomerEndpoints do
-  describe CustomerStore::Client do
+RSpec.describe Shore::Customers::CustomerEndpoints do
+  describe Shore::Customers::Client do
     before do
       expect(described_class.included_modules)
-        .to include(CustomerStore::CustomerEndpoints)
+        .to include(Shore::Customers::CustomerEndpoints)
     end
 
-    let(:client) { CustomerStore::Client.new }
+    let(:client) { Shore::Customers::Client.new }
 
     describe '#customers_url' do
       it 'should return the customers url for the given oid' do

@@ -1,13 +1,13 @@
 require 'spec_helper'
 
-RSpec.describe CustomerStore::WebhookEndpoints do
-  describe CustomerStore::Client do
+RSpec.describe Shore::Customers::WebhookEndpoints do
+  describe Shore::Customers::Client do
     before do
       expect(described_class.included_modules)
-        .to include(CustomerStore::WebhookEndpoints)
+        .to include(Shore::Customers::WebhookEndpoints)
     end
 
-    let(:client) { CustomerStore::Client.new }
+    let(:client) { Shore::Customers::Client.new }
 
     describe '#webhooks_url' do
       it 'should return the webhooks url for the given oid' do

@@ -1,16 +1,16 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'customer_store/client/version'
+require 'shore/customers/version'
 
 Gem::Specification.new do |spec|
-  spec.name = 'customer_store-client'
-  spec.version = CustomerStore::Client::VERSION
+  spec.name = 'shore-customers'
+  spec.version = Shore::Customers::VERSION
   spec.authors = ['Austin Moore']
   spec.email = ['am@shore.com']
 
-  spec.summary = 'Customer Store client'
-  spec.description = "Client gem to communicate with the Customer \
+  spec.summary = 'Shore Customer Store client'
+  spec.description = "Client gem to communicate with the Shore Customer \
 Store Service (CSS)."
   spec.homepage = 'https://css.shore.com'
 
