@@ -14,6 +14,11 @@ RSpec.describe Shore::Customers::CustomerEndpoints do
         expect(client.customers_url('the-oid'))
           .to eq(customer_store.base_uri + '/v1/the-oid/customers')
       end
+
+      it 'should accept an options hash' do
+        expect(client.customers_url('the-oid', 'param' => 'value'))
+          .to eq(customer_store.base_uri + '/v1/the-oid/customers?param=value')
+      end
     end
 
     describe '#get_customers' do

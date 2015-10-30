@@ -5,9 +5,10 @@ module Shore
     module AttributeDefinitionEndpoints # :nodoc:
       extend ::ActiveSupport::Concern
 
-      def attribute_definitions_url(oid)
+      def attribute_definitions_url(oid, options = {})
         uri = conn.url_prefix.clone
         uri.path = attribute_definitions_path(oid)
+        uri.query = options.to_query if options.present?
         uri.to_s
       end
 

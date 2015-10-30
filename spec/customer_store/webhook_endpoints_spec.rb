@@ -14,6 +14,11 @@ RSpec.describe Shore::Customers::WebhookEndpoints do
         expect(client.webhooks_url('the-oid'))
           .to eq(customer_store.base_uri + '/v1/the-oid/webhooks')
       end
+
+      it 'should accept an options hash' do
+        expect(client.webhooks_url('the-oid', 'param' => 'value'))
+          .to eq(customer_store.base_uri + '/v1/the-oid/webhooks?param=value')
+      end
     end
 
     describe '#get_webhooks' do

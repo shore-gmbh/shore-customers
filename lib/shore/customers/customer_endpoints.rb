@@ -5,9 +5,10 @@ module Shore
     module CustomerEndpoints # :nodoc:
       extend ActiveSupport::Concern
 
-      def customers_url(oid)
+      def customers_url(oid, options = {})
         uri = conn.url_prefix.clone
         uri.path = customers_path(oid)
+        uri.query = options.to_query if options.present?
         uri.to_s
       end
 

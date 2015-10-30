@@ -5,9 +5,10 @@ module Shore
     module WebhookEndpoints # :nodoc:
       extend ::ActiveSupport::Concern
 
-      def webhooks_url(oid)
+      def webhooks_url(oid, options = {})
         uri = conn.url_prefix.clone
         uri.path = webhooks_path(oid)
+        uri.query = options.to_query if options.present?
         uri.to_s
       end
 
