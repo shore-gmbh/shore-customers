@@ -12,14 +12,15 @@ RSpec.describe Shore::Customers::AttributeDefinitionEndpoints do
     describe '#attribute_definitions_url' do
       it 'should return the attribute_definitions url for the given oid' do
         expect(client.attribute_definitions_url('the-oid'))
-          .to eq(customer_store.base_uri + '/v1/the-oid/attribute_definitions')
+          .to eq(customer_store.base_uri +
+                   '/v1/the-oid/customers/attribute_definitions')
       end
 
       it 'should accept an options hash' do
         expect(client.attribute_definitions_url(
                  'the-oid', 'param' => 'value'))
           .to eq(customer_store.base_uri +
-                   '/v1/the-oid/attribute_definitions?param=value')
+                   '/v1/the-oid/customers/attribute_definitions?param=value')
       end
     end
 
