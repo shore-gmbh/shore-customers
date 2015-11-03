@@ -141,11 +141,21 @@ RSpec.describe Shore::Customers::CustomerEndpoints do
         end.to call_customer_store.get_customer_feed('the-oid', 'the-id')
       end
 
+      it 'should accept an after parameter' do
+        expect do
+          client.get_customer_feed('the-oid', 'the-id',
+                                   'after' => 'the_event_id')
+        end.to call_customer_store.get_customer_feed(
+          'the-oid', 'the-id',
+          'after' => 'the_event_id')
+      end
+
       it 'should return the status' do
         expect do
           expect(client.get_customer_feed('the-oid', 'the-id')['status'])
             .to eq(500)
         end.to call_customer_store.get_customer_feed('the-oid', 'the-id',
+                                                     {},
                                                      'status' => 500)
       end
 
