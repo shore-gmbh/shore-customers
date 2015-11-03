@@ -11,12 +11,9 @@ module Shore
 
         # @return WebMock::RequestStub
         def stub_get_customers(oid, params = {}, resp = {})
-          string_params = Hash[
-            params.map { |key, value| [key.to_s, value.to_s] }
-          ]
           url = "#{base_uri}/v1/#{oid}/customers"
           stub_request(:get, url)
-            .with(query: hash_including(string_params))
+            .with(query: hash_including(string_params(params)))
             .to_return(
               status: customer_status(resp),
               body: resp['body_json'] || customers_resp_body(resp).to_json,
@@ -36,10 +33,10 @@ module Shore
         end
 
         # @return WebMock::RequestStub
-        def stub_get_customer_feed(oid, customer_id, resp = {})
+        def stub_get_customer_feed(oid, customer_id, params = {}, resp = {})
           url = "#{base_uri}/v1/#{oid}/customers/#{customer_id}/feed"
           stub_request(:get, url)
-            .with(query: hash_including({}))
+            .with(query: hash_including(string_params(params)))
             .to_return(
               status: customer_status(resp),
               body: resp['body_json'] ||
@@ -86,6 +83,12 @@ module Shore
 
         def customer_headers
           { 'content-type' => 'application/json' }
+        end
+
+        def string_params(params)
+          Hash[
+            params.map { |key, value| [key.to_s, value.to_s] }
+          ]
         end
       end
     end
