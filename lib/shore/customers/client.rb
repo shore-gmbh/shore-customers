@@ -1,10 +1,11 @@
 require 'faraday'
+require 'faraday_middleware'
 require_relative 'customer_endpoints'
 require_relative 'webhook_endpoints'
 require_relative 'attribute_definition_endpoints'
 
 module Shore
-  module Customers
+  module Customers # :nodoc:
     class Client # :nodoc:
       include CustomerEndpoints
       include WebhookEndpoints
@@ -25,32 +26,24 @@ module Shore
 
       def initialize_conn(options)
         base_url = options[:base_uri] || ENV['CUSTOMER_STORE_BASE_URI']
-        fail "Error: #{self.class} must be initialized with a \
-:base_url option or env variable CUSTOMER_STORE_BASE_URI \
-must be set." if base_url.blank?
+        fail initialize_failure if base_url.blank?
         secret = options[:secret] || ENV['CUSTOMER_STORE_SECRET']
 
         @conn = Faraday.new(url: base_url) do |faraday|
           # TODO@am: Configure Faraday here
           # faraday.request  :url_encoded
           # faraday.response :logger
+          faraday.response :json, content_type: 'application/json'
           faraday.adapter Faraday.default_adapter
           faraday.basic_auth(secret, '')
         end
+        @conn.headers = { 'Content-Type' => 'application/json' }
       end
+    end
 
-      def format_response(response)
-        formatted = {
-          'status' => response.status,
-          'headers' => response.headers
-        }
-        if (body = response.body).present? &&
-           response.headers['content-type'] == 'application/json'
-          body = JSON(body)
-        end
-        formatted['body'] = body
-        formatted
-      end
+    def initialize_failure
+      "Error: #{self.class} must be initialized with a :base_url \
+      option or env variable CUSTOMER_STORE_BASE_URI must be set."
     end
   end
 end

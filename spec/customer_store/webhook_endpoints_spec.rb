@@ -42,20 +42,20 @@ RSpec.describe Shore::Customers::WebhookEndpoints do
 
       it 'should return the status' do
         expect do
-          expect(client.get_webhooks('the-oid')['status']).to eq(500)
+          expect(client.get_webhooks('the-oid').status).to eq(500)
         end.to call_customer_store.get_webhooks('the-oid', 'status' => 500)
       end
 
       it 'should return the headers' do
         expect do
-          expect(client.get_webhooks('the-oid')['headers'])
+          expect(client.get_webhooks('the-oid').headers)
             .to eq('content-type' => 'application/json')
         end.to call_customer_store.get_webhooks('the-oid')
       end
 
       it 'should return the parsed json body' do
         expect do
-          expect(client.get_webhooks('the-oid')['body'])
+          expect(client.get_webhooks('the-oid').body)
             .to match(a_hash_including('webhooks' => []))
         end.to call_customer_store.get_webhooks('the-oid')
       end
@@ -88,21 +88,21 @@ RSpec.describe Shore::Customers::WebhookEndpoints do
 
       it 'should return the status' do
         expect do
-          expect(client.get_webhook('the-oid', 'the-id')['status']).to eq(500)
+          expect(client.get_webhook('the-oid', 'the-id').status).to eq(500)
         end.to call_customer_store.get_webhook('the-oid', 'the-id',
                                                'status' => 500)
       end
 
       it 'should return the headers' do
         expect do
-          expect(client.get_webhook('the-oid', 'the-id')['headers'])
+          expect(client.get_webhook('the-oid', 'the-id').headers)
             .to eq('content-type' => 'application/json')
         end.to call_customer_store.get_webhook('the-oid', 'the-id')
       end
 
       it 'should return the parsed json body' do
         expect do
-          expect(client.get_webhook('the-oid', 'the-id')['body'])
+          expect(client.get_webhook('the-oid', 'the-id').body)
             .to match(a_hash_including(
                         'webhook' => a_hash_including(
                           'id' => 'the-id')))
@@ -140,7 +140,7 @@ RSpec.describe Shore::Customers::WebhookEndpoints do
 
       it 'should return the status' do
         expect do
-          expect(client.update_webhook('the-oid', 'the-id', {})['status'])
+          expect(client.update_webhook('the-oid', 'the-id', {}).status)
             .to eq(500)
         end.to call_customer_store.update_webhook('the-oid', 'the-id', {},
                                                   'status' => 500)
@@ -148,14 +148,14 @@ RSpec.describe Shore::Customers::WebhookEndpoints do
 
       it 'should return the headers' do
         expect do
-          expect(client.update_webhook('the-oid', 'the-id', {})['headers'])
+          expect(client.update_webhook('the-oid', 'the-id', {}).headers)
             .to eq('content-type' => 'application/json')
         end.to call_customer_store.update_webhook('the-oid', 'the-id')
       end
 
       it 'should return the parsed json body' do
         expect do
-          expect(client.update_webhook('the-oid', 'the-id', {})['body'])
+          expect(client.update_webhook('the-oid', 'the-id', {}).body)
             .to match(a_hash_including(
                         'webhook' => a_hash_including('id' => 'the-id'),
                         'event_id' => an_instance_of(String)))
@@ -190,7 +190,7 @@ RSpec.describe Shore::Customers::WebhookEndpoints do
 
       it 'should return the status' do
         expect do
-          expect(client.delete_webhook('the-oid', 'the-id')['status'])
+          expect(client.delete_webhook('the-oid', 'the-id').status)
             .to eq(500)
         end.to call_customer_store.delete_webhook('the-oid', 'the-id',
                                                   'status' => 500)
@@ -198,14 +198,14 @@ RSpec.describe Shore::Customers::WebhookEndpoints do
 
       it 'should return the headers' do
         expect do
-          expect(client.delete_webhook('the-oid', 'the-id')['headers'])
+          expect(client.delete_webhook('the-oid', 'the-id').headers)
             .to eq('content-type' => 'application/json')
         end.to call_customer_store.delete_webhook('the-oid', 'the-id')
       end
 
       it 'should return the parsed json body' do
         expect do
-          expect(client.delete_webhook('the-oid', 'the-id')['body'])
+          expect(client.delete_webhook('the-oid', 'the-id').body)
             .to match(a_hash_including('event_id' => an_instance_of(String)))
         end.to call_customer_store.delete_webhook('the-oid', 'the-id')
       end

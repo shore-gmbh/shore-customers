@@ -45,22 +45,22 @@ GET /v1/the-oid/attribute_definitions" do
 
       it 'should return the status' do
         expect do
-          expect(client.get_attribute_definitions('the-oid')['status'])
+          expect(client.get_attribute_definitions('the-oid').status)
             .to eq(500)
-        end.to call_customer_store.get_attribute_definitions('the-oid',
-                                                             'status' => 500)
+        end.to call_customer_store
+          .get_attribute_definitions('the-oid', 'status' => 500)
       end
 
       it 'should return the headers' do
         expect do
-          expect(client.get_attribute_definitions('the-oid')['headers'])
+          expect(client.get_attribute_definitions('the-oid').headers)
             .to eq('content-type' => 'application/json')
         end.to call_customer_store.get_attribute_definitions('the-oid')
       end
 
       it 'should return the parsed json body' do
         expect do
-          expect(client.get_attribute_definitions('the-oid')['body'])
+          expect(client.get_attribute_definitions('the-oid').body)
             .to match(a_hash_including('attribute_definitions' => []))
         end.to call_customer_store.get_attribute_definitions('the-oid')
       end
@@ -95,7 +95,7 @@ GET /v1/the-oid/attribute_definitions/the-id" do
       it 'should return the status' do
         expect do
           expect(client.get_attribute_definition(
-            'the-oid', 'the-id')['status']).to eq(500)
+            'the-oid', 'the-id').status).to eq(500)
         end.to call_customer_store.get_attribute_definition('the-oid', 'the-id',
                                                             'status' => 500)
       end
@@ -103,14 +103,14 @@ GET /v1/the-oid/attribute_definitions/the-id" do
       it 'should return the headers' do
         expect do
           expect(client.get_attribute_definition(
-            'the-oid', 'the-id')['headers'])
+            'the-oid', 'the-id').headers)
             .to eq('content-type' => 'application/json')
         end.to call_customer_store.get_attribute_definition('the-oid', 'the-id')
       end
 
       it 'should return the parsed json body' do
         expect do
-          expect(client.get_attribute_definition('the-oid', 'the-id')['body'])
+          expect(client.get_attribute_definition('the-oid', 'the-id').body)
             .to match(a_hash_including(
                         'attribute_definition' => a_hash_including(
                           'id' => 'the-id')))
@@ -144,7 +144,7 @@ POST /v1/the-oid/attribute_definitions/the-id" do
       it 'should return the status' do
         expect do
           expect(client.create_attribute_definition(
-            'the-oid', {})['status'])
+            'the-oid', {}).status)
             .to eq(500)
         end.to call_customer_store.create_attribute_definition(
           'the-oid', {},
@@ -154,7 +154,7 @@ POST /v1/the-oid/attribute_definitions/the-id" do
       it 'should return the headers' do
         expect do
           expect(client.create_attribute_definition(
-            'the-oid', {})['headers'])
+            'the-oid', {}).headers)
             .to eq('content-type' => 'application/json')
         end.to call_customer_store.create_attribute_definition('the-oid')
       end
@@ -162,7 +162,7 @@ POST /v1/the-oid/attribute_definitions/the-id" do
       it 'should return the parsed json body' do
         expect do
           expect(client.create_attribute_definition(
-            'the-oid', 'name' => 'Hair Color')['body'])
+            'the-oid', 'name' => 'Hair Color').body)
             .to match(a_hash_including(
                         'attribute_definition' => a_hash_including(
                           'name' => 'Hair Color'),
@@ -205,7 +205,7 @@ PUT /v1/the-oid/attribute_definitions/the-id" do
       it 'should return the status' do
         expect do
           expect(client.update_attribute_definition(
-            'the-oid', 'the-id', {})['status'])
+            'the-oid', 'the-id', {}).status)
             .to eq(500)
         end.to call_customer_store.update_attribute_definition(
           'the-oid', 'the-id', {},
@@ -215,7 +215,7 @@ PUT /v1/the-oid/attribute_definitions/the-id" do
       it 'should return the headers' do
         expect do
           expect(client.update_attribute_definition(
-            'the-oid', 'the-id', {})['headers'])
+            'the-oid', 'the-id', {}).headers)
             .to eq('content-type' => 'application/json')
         end.to call_customer_store.update_attribute_definition(
           'the-oid', 'the-id')
@@ -224,7 +224,7 @@ PUT /v1/the-oid/attribute_definitions/the-id" do
       it 'should return the parsed json body' do
         expect do
           expect(client.update_attribute_definition(
-            'the-oid', 'the-id', {})['body'])
+            'the-oid', 'the-id', {}).body)
             .to match(a_hash_including(
                         'attribute_definition' => a_hash_including(
                           'id' => 'the-id'),
@@ -264,7 +264,7 @@ DELETE /v1/the-oid/attribute_definitions/the-id" do
       it 'should return the status' do
         expect do
           expect(client.delete_attribute_definition(
-            'the-oid', 'the-id')['status'])
+            'the-oid', 'the-id').status)
             .to eq(500)
         end.to call_customer_store.delete_attribute_definition(
           'the-oid', 'the-id',
@@ -274,7 +274,7 @@ DELETE /v1/the-oid/attribute_definitions/the-id" do
       it 'should return the headers' do
         expect do
           expect(client.delete_attribute_definition(
-            'the-oid', 'the-id')['headers'])
+            'the-oid', 'the-id').headers)
             .to eq('content-type' => 'application/json')
         end.to call_customer_store.delete_attribute_definition(
           'the-oid', 'the-id')
@@ -283,7 +283,7 @@ DELETE /v1/the-oid/attribute_definitions/the-id" do
       it 'should return the parsed json body' do
         expect do
           expect(client.delete_attribute_definition(
-            'the-oid', 'the-id')['body'])
+            'the-oid', 'the-id').body)
             .to match(a_hash_including('event_id' => an_instance_of(String)))
         end.to call_customer_store.delete_attribute_definition(
           'the-oid', 'the-id')

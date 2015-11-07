@@ -17,11 +17,11 @@ module Shore
         params = options.select do |key, _value|
           %w(page).include?(key)
         end
-        format_response(conn.get(path, params))
+        conn.get(path, params)
       end
 
       def get_customer(oid, customer_id)
-        format_response(conn.get(customer_path(oid, customer_id)))
+        conn.get(customer_path(oid, customer_id))
       end
 
       # @param [Hash] options
@@ -29,19 +29,18 @@ module Shore
       #   after the entry with this given event id. Option ignored if
       #   blank or not a known event_id for any of the entries.
       def get_customer_feed(oid, customer_id, options = {})
-        format_response(conn.get(customer_feed_path(oid, customer_id), options))
+        conn.get(customer_feed_path(oid, customer_id), options)
       end
 
       def update_customer(oid, customer_id, attributes)
-        format_response(conn.put do |req|
-                          req.url customer_path(oid, customer_id)
-                          req.headers['Content-Type'] = 'application/json'
-                          req.body = attributes.to_json
-                        end)
+        conn.put do |req|
+          req.url customer_path(oid, customer_id)
+          req.body = attributes.to_json
+        end
       end
 
       def delete_customer(oid, customer_id)
-        format_response(conn.delete(customer_path(oid, customer_id)))
+        conn.delete(customer_path(oid, customer_id))
       end
 
       private
