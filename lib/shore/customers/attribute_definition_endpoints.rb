@@ -14,32 +14,29 @@ module Shore
 
       def get_attribute_definitions(oid)
         path = attribute_definitions_path(oid)
-        format_response(conn.get(path))
+        conn.get(path)
       end
 
       def get_attribute_definition(oid, definition_id)
-        format_response(conn.get(attribute_definition_path(oid, definition_id)))
+        conn.get(attribute_definition_path(oid, definition_id))
       end
 
       def create_attribute_definition(oid, attributes)
-        format_response(conn.post do |req|
-                          req.url attribute_definitions_path(oid)
-                          req.headers['Content-Type'] = 'application/json'
-                          req.body = attributes.to_json
-                        end)
+        conn.post do |req|
+          req.url attribute_definitions_path(oid)
+          req.body = attributes.to_json
+        end
       end
 
       def update_attribute_definition(oid, definition_id, attributes)
-        format_response(conn.put do |req|
-                          req.url attribute_definition_path(oid, definition_id)
-                          req.headers['Content-Type'] = 'application/json'
-                          req.body = attributes.to_json
-                        end)
+        conn.put do |req|
+          req.url attribute_definition_path(oid, definition_id)
+          req.body = attributes.to_json
+        end
       end
 
       def delete_attribute_definition(oid, definition_id)
-        format_response(conn.delete(attribute_definition_path(
-                                      oid, definition_id)))
+        conn.delete(attribute_definition_path(oid, definition_id))
       end
 
       private

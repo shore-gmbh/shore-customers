@@ -30,7 +30,8 @@ gem pushes."
   spec.executables = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = ['lib']
 
-  spec.add_dependency 'faraday', '>= 0.9.1'
+  spec.add_dependency 'faraday', '~> 0.9.2'
+  spec.add_dependency 'faraday_middleware', '~> 0.10.0'
   spec.add_dependency 'activesupport', '>= 3'
 
   spec.add_development_dependency 'bundler', '~> 1.10'
