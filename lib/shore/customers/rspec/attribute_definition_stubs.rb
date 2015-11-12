@@ -11,7 +11,7 @@ module Shore
 
         # @return WebMock::RequestStub
         def stub_get_attribute_definitions(oid, resp = {})
-          url = "#{base_uri}/v1/#{oid}/attribute_definitions"
+          url = "#{base_uri}/v1/#{oid}/customers/attribute_definitions"
           stub_request(:get, url)
             .with(query: hash_including({}))
             .to_return(
@@ -23,7 +23,7 @@ module Shore
 
         # @return WebMock::RequestStub
         def stub_get_attribute_definition(oid, id, resp = {})
-          url = "#{base_uri}/v1/#{oid}/attribute_definitions/#{id}"
+          url = "#{base_uri}/v1/#{oid}/customers/attribute_definitions/#{id}"
           stub_request(:get, url)
             .with(query: hash_including({}))
             .to_return(
@@ -35,7 +35,7 @@ module Shore
 
         # @return WebMock::RequestStub
         def stub_create_attribute_definition(oid, attrs = {}, resp = {})
-          url = "#{base_uri}/v1/#{oid}/attribute_definitions"
+          url = "#{base_uri}/v1/#{oid}/customers/attribute_definitions"
           stub_request(:post, url)
             .with(
               query: hash_including({}),
@@ -49,7 +49,7 @@ module Shore
 
         # @return WebMock::RequestStub
         def stub_update_attribute_definition(oid, id, attrs = {}, resp = {})
-          url = "#{base_uri}/v1/#{oid}/attribute_definitions/#{id}"
+          url = "#{base_uri}/v1/#{oid}/customers/attribute_definitions/#{id}"
           stub_request(:put, url)
             .with(
               query: hash_including({}),
@@ -63,7 +63,7 @@ module Shore
 
         # @return WebMock::RequestStub
         def stub_delete_attribute_definition(oid, id, resp = {})
-          url = "#{base_uri}/v1/#{oid}/attribute_definitions/#{id}"
+          url = "#{base_uri}/v1/#{oid}/customers/attribute_definitions/#{id}"
           stub_request(:delete, url)
             .with(query: hash_including({}))
             .to_return(

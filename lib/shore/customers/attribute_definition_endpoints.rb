@@ -46,7 +46,7 @@ module Shore
 
       def attribute_definitions_path(oid)
         fail 'oid cannot be blank' if oid.blank?
-        "/v1/#{oid}/attribute_definitions"
+        "/v1/#{oid}/customers/attribute_definitions"
       end
 
       def attribute_definition_path(oid, definition_id)
