@@ -1,13 +1,11 @@
 require 'faraday'
 require_relative 'customer_endpoints'
-require_relative 'webhook_endpoints'
 require_relative 'attribute_definition_endpoints'
 
 module Shore
   module Customers
     class Client # :nodoc:
       include CustomerEndpoints
-      include WebhookEndpoints
       include AttributeDefinitionEndpoints
 
       # @param options [Hash]
