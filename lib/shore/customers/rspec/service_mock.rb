@@ -1,5 +1,4 @@
 require_relative 'customer_stubs'
-require_relative 'webhook_stubs'
 require_relative 'attribute_definition_stubs'
 
 module Shore
@@ -8,7 +7,6 @@ module Shore
       class ServiceMock # :nodoc:
         include WebMock::API
         include CustomerStubs
-        include WebhookStubs
         include AttributeDefinitionStubs
 
         attr_reader :base_uri
