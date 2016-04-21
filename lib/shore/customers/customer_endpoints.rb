@@ -5,6 +5,8 @@ module Shore
     module CustomerEndpoints # :nodoc:
       extend ActiveSupport::Concern
 
+      PARAMS_WHITELIST = %w(page per_page tags)
+
       def customers_url(oid, options = {})
         uri = conn.url_prefix.clone
         uri.path = customers_path(oid)
@@ -12,10 +14,17 @@ module Shore
         uri.to_s
       end
 
+      # Gets list of organization customers
+      #
+      # @param [String] oid UUID of organization
+      # @param [Hash] options
+      # @option [Integer] page
+      # @option [Integer] per_page
+      # @option [String] tags Comma separated list of tags
       def get_customers(oid, options = {})
         path = customers_path(oid)
         params = options.select do |key, _value|
-          %w(page).include?(key)
+          PARAMS_WHITELIST.include?(key)
         end
         format_response(conn.get(path, params))
       end
