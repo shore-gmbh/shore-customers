@@ -46,6 +46,29 @@ RSpec.describe Shore::Customers::CustomerEndpoints do
         end.to call_customer_store.get_customers('the-oid', 'page' => 2)
       end
 
+      it 'should accept a per_page parameter' do
+        expect do
+          client.get_customers('the-oid', 'per_page' => 5)
+        end.to call_customer_store.get_customers('the-oid', 'per_page' => 5)
+      end
+
+      it 'should accept a tags parameter' do
+        expect do
+          client.get_customers('the-oid', 'tags' => 'all')
+        end.to call_customer_store.get_customers('the-oid', 'tags' => 'all')
+      end
+
+      it 'should accept combination of parametrs' do
+        params = {
+          'tags' => 'all',
+          'page' => 2,
+          'per_page' => 5
+        }
+        expect do
+          client.get_customers('the-oid', params)
+        end.to call_customer_store.get_customers('the-oid', params)
+      end
+
       it 'should return the status' do
         expect do
           expect(client.get_customers('the-oid')['status']).to eq(500)
