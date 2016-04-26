@@ -21,6 +21,20 @@ module Shore
         end
 
         # @return WebMock::RequestStub
+        def stub_filter_customers(oid, params = {}, resp = {})
+          url = "#{base_uri}/v1/#{oid}/filter/customers"
+          stub_request(:post, url)
+            .with(
+              body: params.to_json,
+              headers: { 'Content-Type' => 'application/json' }
+            )
+            .to_return(
+              status: customer_status(resp),
+              body: resp['body_json'] || customers_resp_body(resp).to_json,
+              headers: customer_headers)
+        end
+
+        # @return WebMock::RequestStub
         def stub_get_customer(oid, customer_id, resp = {})
           url = "#{base_uri}/v1/#{oid}/customers/#{customer_id}"
           stub_request(:get, url)

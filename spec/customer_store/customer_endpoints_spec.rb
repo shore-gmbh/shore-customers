@@ -21,6 +21,34 @@ RSpec.describe Shore::Customers::CustomerEndpoints do
       end
     end
 
+    describe '#filter_customers' do
+      it 'should fail if the oid is blank' do
+        expect do
+          client.filter_customers('')
+        end.to raise_error('oid cannot be blank')
+      end
+
+      it 'should call the customer store' do
+        expect do
+          client.filter_customers('the-oid')
+        end.to call_customer_store
+      end
+
+      it 'should call the customer store GET /v1/the-oid/filter/customers' do
+        expect do
+          client.filter_customers('the-oid')
+        end.to call_customer_store.filter_customers('the-oid')
+      end
+
+      it 'should accept a uids parameter' do
+        expect do
+          client.filter_customers('the-oid', 'uids' => %w(123 456))
+        end.to call_customer_store.filter_customers(
+          'the-oid', 'uids' => %w(123 456)
+        )
+      end
+    end
+
     describe '#get_customers' do
       it 'should fail if the oid is blank' do
         expect do

@@ -6,12 +6,30 @@ module Shore
       extend ActiveSupport::Concern
 
       PARAMS_WHITELIST = %w(page per_page tags)
+      FILTER_WHITELIST = %w(uids)
 
       def customers_url(oid, options = {})
         uri = conn.url_prefix.clone
         uri.path = customers_path(oid)
         uri.query = options.to_query if options.present?
         uri.to_s
+      end
+
+      # Filters customers of organization
+      #
+      # @param [String] oid UUID of organization
+      # @param [Hash] options
+      # @option [Array] uids
+      def filter_customers(oid, options = {})
+        path = filter_customers_path(oid)
+        params = options.select do |key, _value|
+          FILTER_WHITELIST.include?(key)
+        end
+        format_response(conn.post do |req|
+          req.url path
+          req.headers['Content-Type'] = 'application/json'
+          req.body = params.to_json
+        end)
       end
 
       # Gets list of organization customers
@@ -63,6 +81,11 @@ module Shore
       def customer_path(oid, customer_id)
         fail 'customer_id cannot be blank' if customer_id.blank?
         "#{customers_path(oid)}/#{customer_id}"
+      end
+
+      def filter_customers_path(oid)
+        fail 'oid cannot be blank' if oid.blank?
+        "/v1/#{oid}/filter/customers"
       end
 
       def customer_feed_path(oid, customer_id)
